@@ -66,11 +66,12 @@ let itemsList = [
 
 let item = itemsList.map(item => {
   return (
-    `<li class='shop--item'>
+    `<li class='shop--item' id=${item.name}>
       <img src=${item.image} />
-      <p>${item.price}€</p>
+      <p class='price'>${item.price}€</p>
     </li>`
   )
 })
 
 itemsContainer.innerHTML = item.join('')
+

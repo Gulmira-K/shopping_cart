@@ -9,10 +9,16 @@
   </head>
   <body>
     <h1>Drag and drop to purchuse</h1>
-    <div class='shop--container'>
+    <div class="shop--container">
       <ul class="shop--items"></ul>
-      <div class="shop--cart"></div>
+      <ul class="shop--cart">
+        <div class="shop--cart__total">
+          <img src="./media/trolley.png" />
+          <h4 id='total'>Your cart is empty</h4>
+        </div>
+      </ul>
     </div>
-    <script src="script.js"></script>
+    <script src="listItems.js"></script>
+    <script src="dragDrop.js"></script>
   </body>
 </html>
