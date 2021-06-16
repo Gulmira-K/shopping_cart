@@ -3,62 +3,62 @@ let cartContainer = document.querySelector('.shop--cart')
 
 let itemsList = [
   {
-    name: 'meat',
+    itemName: 'meat',
     image: './media/meat.png',
     price: 10
   },
   {
-    name: 'milk',
+    itemName: 'milk',
     image: './media/milk.png',
     price: 1.5
   },
   {
-    name: 'bread',
+    itemName: 'bread',
     image: './media/bread.png',
     price: 3
   },
   {
-    name: 'broccoli',
+    itemName: 'broccoli',
     image: './media/brocoli.png',
     price: 2
   },
   {
-    name: 'cereals',
+    itemName: 'cereals',
     image: './media/cereals.png',
     price: 1.5
   },
   {
-    name: 'cheese',
+    itemName: 'cheese',
     image: './media/cheese.png',
     price: 4
   },
   {
-    name: 'eggs',
+    itemName: 'eggs',
     image: './media/eggs.png',
     price: 4
   },
   {
-    name: 'jam',
+    itemName: 'jam',
     image: './media/jam.png',
     price: 4
   },
   {
-    name: 'lettuce',
+    itemName: 'lettuce',
     image: './media/lettuce.png',
     price: 4
   },
   {
-    name: 'pasta',
+    itemName: 'pasta',
     image: './media/pasta.png',
     price: 4
   },
   {
-    name: 'sausages',
+    itemName: 'sausages',
     image: './media/sausages.png',
     price: 4
   },
   {
-    name: 'tomatos',
+    itemName: 'tomatos',
     image: './media/tomate.png',
     price: 4
   },
@@ -67,6 +67,7 @@ let itemsList = [
 let item = itemsList.map(item => {
   return (
     `<li class='shop--item' id=${item.name}>
+      <p class='item--name'>${item.itemName}</p>
       <img src=${item.image} />
       <p class='price'>${item.price}€</p>
     </li>`

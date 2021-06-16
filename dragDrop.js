@@ -1,84 +1,70 @@
+const shop = document.querySelector('.shop--items');
+const cart = document.querySelector('.shop--cart');
+let totalPrice = document.querySelector('#total--price');
+const payBtn = document.getElementById('total--button');
 let items = document.querySelectorAll('.shop--item');
-const cart = document.querySelector('.shop--cart')
+let priceArray = new Array();
+
+totalPrice.innerHTML = 0;
+
+cart.addEventListener('dragover', dragOver);
+payBtn.addEventListener('click', handlePay);
 
 items.forEach(item => {
-  // item.addEventListener('mousedown', handleMouseDown);
-  // item.addEventListener('mouseup', handleMouseUp);
-
-
-  // function handleMouseDown(e) {
-  //   console.log(item)
-  //   item.style.position = 'absolute';
-  //   cart.append(item);
-
-  //   moveAt(e.pageX, e.pageY);
-
-  //   cart.addEventListener('mousemove', handleMouseMove);
-  // }
-
-
-
-  // function handleMouseUp() {
-  //   cart.removeEventListener('mousemove', handleMouseMove);
-  //   item.onmouseup = null;
-  //   console.log( item.onmouseup )
-  // }
-
-  //  function handleMouseMove(e) {
-  //   moveAt(e.pageX, e.pageY);
-  // }
-
-  // function moveAt(pageX, pageY) {
-  //   item.style.left = pageX - item.offsetWidth / 2 + 'px';
-  //   item.style.top = pageY - item.offsetHeight / 2 + 'px';
-  // }
-
   item.addEventListener('dragstart', dragStart);
   item.addEventListener('dragend', dragEnd);
 
   function dragStart() {
-    item.classList.add('dragging')
+    item.classList.add('dragging');
   }
 
   function dragEnd() {
-    item.classList.remove('dragging')
+    item.classList.remove('dragging');
+    item.childNodes[1].style.display = 'block';
+    item.childNodes[3].style.display = 'none';
 
-    item.removeChild(item.childNodes[1])
+    let removeBtn = document.createElement('button');
+      
+    removeBtn.innerHTML = 'X';
 
-    let itemId = item.getAttribute('id');
-    let itemName = document.createElement('p');
-    itemName.innerHTML = itemId;
-    item.insertAdjacentElement('afterbegin', itemName)
+    item.insertAdjacentElement('beforeend', removeBtn);
+    
+    removeBtn.addEventListener('click', removeItem.bind(null, item));
+
+    let sum = 0;
+    let itemPrice = item.childNodes[5].innerHTML;
+
+    priceArray.push(parseFloat(itemPrice));
+   
+    for (let i = 0; i < priceArray.length; i++) { sum += priceArray[i] };
+  
+    totalPrice.innerText = sum;
   }
 });
 
-cart.addEventListener('dragover', dragOver);
-
 function dragOver() {
   const draggable = document.querySelector('.dragging');
-  const total = document.querySelector('#total')
-  let price = parseInt(draggable.childNodes[3].innerHTML);
-  let priceArray = [];
-
-  priceArray.push(price)
-  console.log(priceArray)
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-  console.log(priceArray.reduce(reducer));
-
-  // const prices = document.querySelectorAll('.dragging > .price')
-  // prices.forEach(price => {
-  //   let itemPrice = parseInt(price.innerHTML)
-  //   let priceArray = new Array();
-  //   priceArray.push(...itemPrice)
-  //   console.log(priceArray)
-  //   const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-  //  console.log(priceArray.reduce(reducer));
-    
-  // })
-  
-  cart.append(draggable)
-  // total.innerHTML = '';
-  // total.innerHTML = `Total: ${totalPrice}€`
+  cart.append(draggable);
 }
+
+function removeItem(item) {
+  shop.appendChild(item)
+    
+  item.childNodes[1].style.display = 'none';
+  item.childNodes[3].style = 'display: block; margin: 0 auto';
+  item.childNodes[7].style.display = 'none';
+
+  let itemPrice = parseFloat(item.childNodes[5].innerHTML);
+  let sum = parseFloat(totalPrice.innerHTML)
+  
+  totalPrice.innerHTML = sum -= itemPrice;
+
+  if (sum === 0) {
+    priceArray.length = 0;
+  }
+}
+
+function handlePay() {
+  alert('Thank you for your purchase!')
+}
+

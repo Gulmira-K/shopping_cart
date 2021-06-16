@@ -8,13 +8,17 @@
     <title>Shopping cart</title>
   </head>
   <body>
-    <h1>Drag and drop to purchuse</h1>
+    <h1>Online Grocery</h1>
     <div class="shop--container">
       <ul class="shop--items"></ul>
       <ul class="shop--cart">
         <div class="shop--cart__total">
           <img src="./media/trolley.png" />
-          <h4 id='total'>Your cart is empty</h4>
+          <h4 id="total">
+            Total:
+            <span id="total--price"></span>€
+          </h4>
+          <input type="button" id="total--button" value="Pay" />
         </div>
       </ul>
     </div>
