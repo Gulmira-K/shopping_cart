@@ -3,6 +3,7 @@ const cart = document.querySelector('.shop--cart');
 let totalPrice = document.querySelector('#total--price');
 const payBtn = document.getElementById('total--button');
 let items = document.querySelectorAll('.shop--item');
+
 let priceArray = new Array();
 
 totalPrice.innerHTML = 0;
@@ -48,14 +49,14 @@ function dragOver() {
 }
 
 function removeItem(item) {
-  shop.appendChild(item)
+  shop.appendChild(item);
     
   item.childNodes[1].style.display = 'none';
   item.childNodes[3].style = 'display: block; margin: 0 auto';
   item.childNodes[7].style.display = 'none';
 
   let itemPrice = parseFloat(item.childNodes[5].innerHTML);
-  let sum = parseFloat(totalPrice.innerHTML)
+  let sum = parseFloat(totalPrice.innerHTML);
   
   totalPrice.innerHTML = sum -= itemPrice;
 
@@ -65,6 +66,10 @@ function removeItem(item) {
 }
 
 function handlePay() {
-  alert('Thank you for your purchase!')
+  if (totalPrice.innerHTML != 0) {
+    alert('Thank you for your purchase!')
+  } else {
+    alert('Your cart is empty...')
+  }
 }
 
